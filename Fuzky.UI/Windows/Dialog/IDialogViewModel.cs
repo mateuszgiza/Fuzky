@@ -1,8 +1,8 @@
 ﻿using Fuzky.UI.Common;
 
-namespace Fuzky.UI.Windows.MessageBox
+namespace Fuzky.UI.Windows.Dialog
 {
-    public interface IMessageBoxViewModel : IWindowViewModel
+    public interface IDialogViewModel<TView> : IWindowViewModel
     {
         string Title { get; set; }
         string Message { get; set; }

@@ -3,11 +3,11 @@ using Fuzky.UI.Common;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Fuzky.UI.Windows.MessageBox
+namespace Fuzky.UI.Windows.Dialog
 {
-    public class MessageBoxViewModel : BaseWindowViewModel, IMessageBoxViewModel
+    public class DialogViewModel<TView> : BaseWindowViewModel, IDialogViewModel<TView>
     {
-        public MessageBoxViewModel(IMessageBox window, IComponentContext container)
+        public DialogViewModel(IDialog window, IComponentContext container)
             : base(window, container)
         {
             this.OkCommand = new DelegateCommand(OnOkCommand, CommandExecutionPolicies.OneAtATime);

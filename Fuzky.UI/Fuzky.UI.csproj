@@ -91,11 +91,15 @@
     <Compile Include="Common\CommandExecutionPolicies.cs" />
     <Compile Include="Common\ICommandExecutionPolicy.cs" />
     <Compile Include="Common\OneAtATimeCommandPolicy.cs" />
+    <Compile Include="DI\EffectsModule.cs" />
     <Compile Include="Helpers\PasswordBoxAssistant.cs" />
+    <Compile Include="Invokers\DialogInvoker.cs" />
+    <Compile Include="Invokers\IDialogInvoker.cs" />
+    <Compile Include="Utils\ThreadDispatcher.cs" />
     <Compile Include="Windows\Main\IMainWindow.cs" />
     <Compile Include="Windows\Main\IMainWindowViewModel.cs" />
     <Compile Include="Windows\Main\MainWindowViewModel.cs" />
-    <Compile Include="UiModule.cs" />
+    <Compile Include="DI\UiModule.cs" />
     <Compile Include="Views\FirstChildView\FirstChildView.xaml.cs">
       <DependentUpon>FirstChildView.xaml</DependentUpon>
     </Compile>
@@ -108,12 +112,13 @@
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView\LoginViewModel.cs" />
-    <Compile Include="Windows\MessageBox\IMessageBox.cs" />
-    <Compile Include="Windows\MessageBox\IMessageBoxViewModel.cs" />
-    <Compile Include="Windows\MessageBox\MessageBox.xaml.cs">
-      <DependentUpon>MessageBox.xaml</DependentUpon>
+    <Compile Include="Windows\Dialog\IDialog.cs" />
+    <Compile Include="Windows\Dialog\IDialogViewModel.cs" />
+    <Compile Include="Windows\Dialog\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MessageBox\MessageBoxViewModel.cs" />
+    <Compile Include="Windows\Dialog\DialogViewModel.cs" />
+    <Compile Include="Windows\WindowBase.cs" />
     <Page Include="Windows\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -142,7 +147,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MessageBox\MessageBox.xaml">
+    <Page Include="Windows\Dialog\Dialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

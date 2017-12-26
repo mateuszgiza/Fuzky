@@ -1,48 +1,32 @@
 ﻿using Autofac;
 using Fuzky.UI.Common;
-using Fuzky.UI.Windows.MessageBox;
+using Fuzky.UI.Invokers;
+using Fuzky.UI.Utils;
+using Fuzky.UI.Windows.Dialog;
 
-namespace Fuzky.UI
+namespace Fuzky.UI.DI
 {
     public class UiModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.RegisterType<MainWindow>()
-            //    .AsImplementedInterfaces()
-            //    .SingleInstance();
-
-            //builder.RegisterType<LoginView>()
-            //    .AsImplementedInterfaces();
-
-            //builder.RegisterType<FirstChildView>()
-            //    .AsImplementedInterfaces();
-
-            //builder.RegisterType<MainWindowViewModel>()
-            //    .AsImplementedInterfaces()
-            //    .SingleInstance();
-
-            //builder.RegisterType<LoginViewModel>()
-            //    .AsImplementedInterfaces();
-
-            //builder.RegisterType<FirstChildViewModel>()
-            //    .AsImplementedInterfaces();
-
             this.RegisterWindows(builder);
             this.RegisterWindowsViewModels(builder);
             this.RegisterViews(builder);
             this.RegisterViewsViewModels(builder);
+            this.RegisterInvokers(builder);
+            this.RegisterUtils(builder);
         }
 
         private void RegisterWindows(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<IWindow>()
-                .Where(x => !x.IsAssignableTo<IMessageBox>())
+                .Where(x => !x.IsAssignableTo<IDialog>())
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            builder.RegisterType<MessageBox>()
+            builder.RegisterType<Dialog>()
                 .AsImplementedInterfaces();
         }
 
@@ -50,12 +34,12 @@ namespace Fuzky.UI
         {
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<IWindowViewModel>()
-                .Where(x => !x.IsAssignableTo<IMessageBoxViewModel>())
+                //.Where(x => x.IsAssignableTo(typeof(IDialogViewModel<>)))
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            builder.RegisterType<MessageBoxViewModel>()
-                .AsImplementedInterfaces();
+            builder.RegisterGeneric(typeof(DialogViewModel<>))
+                .As(typeof(IDialogViewModel<>));
         }
 
         private void RegisterViews(ContainerBuilder builder)
@@ -69,6 +53,18 @@ namespace Fuzky.UI
         {
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<IViewModel>()
+                .AsImplementedInterfaces();
+        }
+
+        private void RegisterInvokers(ContainerBuilder builder)
+        {
+            builder.RegisterType<DialogInvoker>()
+                .AsImplementedInterfaces();
+        }
+
+        private void RegisterUtils(ContainerBuilder builder)
+        {
+            builder.RegisterType<ThreadDispatcher>()
                 .AsImplementedInterfaces();
         }
     }

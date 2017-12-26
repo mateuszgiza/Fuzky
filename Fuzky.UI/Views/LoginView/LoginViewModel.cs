@@ -2,7 +2,7 @@
 using Fuzky.Core;
 using Fuzky.Core.Utils;
 using Fuzky.UI.Common;
-using Fuzky.UI.Windows.MessageBox;
+using Fuzky.UI.Windows.Dialog;
 using System;
 using System.Threading.Tasks;
 
@@ -30,7 +30,7 @@ namespace Fuzky.UI.Views.LoginView
 
         private async Task OnLoginCommand(object o)
         {
-            this.ShowDialog<IMessageBoxViewModel>(d =>
+            this.ShowDialog<IDialogViewModel<object>>(d =>
             {
                 d.Title = "Steam Authentication";
                 d.Message = "Two Factor Code Required!";
@@ -49,19 +49,19 @@ namespace Fuzky.UI.Views.LoginView
 
         private void OnTwoFactorCodeRequired(object sender, EventArgs eventArgs)
         {
-            this.ShowDialog<IMessageBoxViewModel>(d =>
+            this.ShowDialog<IDialogViewModel<object>>(d =>
             {
                 d.Title = "Steam Authentication";
-                d.Message = "Two Factor Code Required!";
+                //d.Message = "Two Factor Code Required!";
             });
         }
 
         private void OnExceptionThrown(object sender, EventArgs eventArgs)
         {
-            this.ShowDialog<IMessageBoxViewModel>(d =>
+            this.ShowDialog<IDialogViewModel<object>>(d =>
             {
                 d.Title = "Steam Authentication";
-                d.Message = "Exception thrown!";
+                //d.Message = "Exception thrown!";
             });
         }
     }
