@@ -4,5 +4,6 @@ namespace Fuzky.UI.Views.LoginView
 {
     public interface ILoginViewModel : IViewModel
     {
+
     }
 }

@@ -41,11 +41,11 @@
                 Padding="10"
                 Content="{Binding Title}"/>
 
-            <Label 
+            <ContentControl
                 Grid.Row="1"
                 Margin="5"
                 Padding="10"
-                Content="{Binding Message}" />
+                Content="{Binding View}"></ContentControl>
 
             <Button
                 Grid.Row="2"

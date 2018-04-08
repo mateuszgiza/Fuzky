@@ -2,7 +2,7 @@
 using Fuzky.Core;
 using Fuzky.Core.Utils;
 using Fuzky.UI.Common;
-using Fuzky.UI.Windows.Dialog;
+using Fuzky.UI.Views.Message;
 using System;
 using System.Threading.Tasks;
 
@@ -30,11 +30,22 @@ namespace Fuzky.UI.Views.LoginView
 
         private async Task OnLoginCommand(object o)
         {
-            this.ShowDialog<IDialogViewModel<object>>(d =>
+            if (this.Username == "ex")
             {
-                d.Title = "Steam Authentication";
-                d.Message = "Two Factor Code Required!";
-            });
+                this.OnExceptionThrown(null, null);
+            }
+            else if (this.Username == "2fa")
+            {
+                this.OnTwoFactorCodeRequired(null, null);
+            }
+            else
+            {
+                this.ShowDialog<IMessageViewModel>(d =>
+                {
+                    d.Title = "Login";
+                    d.View.Message = "Login Command!";
+                });
+            }
 
             //var response = await this.steamAuthentication.Authenticate(Username, Password, "");
             //if (response.LoginComplete)
@@ -49,19 +60,19 @@ namespace Fuzky.UI.Views.LoginView
 
         private void OnTwoFactorCodeRequired(object sender, EventArgs eventArgs)
         {
-            this.ShowDialog<IDialogViewModel<object>>(d =>
+            this.ShowDialog<IMessageViewModel>(d =>
             {
                 d.Title = "Steam Authentication";
-                //d.Message = "Two Factor Code Required!";
+                d.View.Message = "Two Factor Code Required!";
             });
         }
 
         private void OnExceptionThrown(object sender, EventArgs eventArgs)
         {
-            this.ShowDialog<IDialogViewModel<object>>(d =>
+            this.ShowDialog<IMessageViewModel>(d =>
             {
-                d.Title = "Steam Authentication";
-                //d.Message = "Exception thrown!";
+                d.Title = "Exception";
+                d.View.Message = "Unexpected expection was thrown!";
             });
         }
     }

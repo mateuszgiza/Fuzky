@@ -12,7 +12,7 @@ namespace Fuzky.UI.Common
             this.Container = container;
         }
 
-        private IViewModel viewModel;
+        protected IViewModel ViewModel;
 
         public IWindow Window { get; set; }
         public IView View { get; set; }
@@ -21,12 +21,12 @@ namespace Fuzky.UI.Common
         protected void ShowView<TViewModel>()
             where TViewModel : IViewModel
         {
-            if (this.viewModel is TViewModel)
+            if (this.ViewModel is TViewModel)
                 return;
 
-            this.viewModel = Container.Resolve<TViewModel>();
-            this.viewModel.Parent = this;
-            this.View = this.viewModel.View;
+            this.ViewModel = Container.Resolve<TViewModel>();
+            this.ViewModel.Parent = this;
+            this.View = this.ViewModel.View;
         }
     }
 }

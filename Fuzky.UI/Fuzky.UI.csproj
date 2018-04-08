@@ -96,6 +96,12 @@
     <Compile Include="Invokers\DialogInvoker.cs" />
     <Compile Include="Invokers\IDialogInvoker.cs" />
     <Compile Include="Utils\ThreadDispatcher.cs" />
+    <Compile Include="Views\Message\IMessageView.cs" />
+    <Compile Include="Views\Message\IMessageViewModel.cs" />
+    <Compile Include="Views\Message\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Message\MessageViewModel.cs" />
     <Compile Include="Windows\Main\IMainWindow.cs" />
     <Compile Include="Windows\Main\IMainWindowViewModel.cs" />
     <Compile Include="Windows\Main\MainWindowViewModel.cs" />
@@ -119,6 +125,10 @@
     </Compile>
     <Compile Include="Windows\Dialog\DialogViewModel.cs" />
     <Compile Include="Windows\WindowBase.cs" />
+    <Page Include="Views\Message\MessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

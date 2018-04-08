@@ -2,9 +2,11 @@
 
 namespace Fuzky.UI.Windows.Dialog
 {
-    public interface IDialogViewModel<TView> : IWindowViewModel
+    public interface IDialogViewModel<out TView> : IWindowViewModel
+        where TView : IViewModel
     {
         string Title { get; set; }
-        string Message { get; set; }
+
+        TView View { get; }
     }
 }

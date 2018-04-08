@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Fuzky.Core.Utils.Interfaces;
 using Fuzky.UI.Invokers;
+using Fuzky.UI.Windows.Dialog;
 using System;
 
 namespace Fuzky.UI.Common
@@ -24,12 +25,12 @@ namespace Fuzky.UI.Common
             this.Dispatcher = this.Container.Resolve<IThreadDispatcher>();
         }
 
-        protected void ShowDialog<TDialog>(Action<TDialog> beforeShow = null)
-            where TDialog : IWindowViewModel
+        protected void ShowDialog<TDialogView>(Action<IDialogViewModel<TDialogView>> dialogSetup = null)
+            where TDialogView : IViewModel
         {
             this.Dispatcher.InvokeIfRequired(delegate
             {
-                this.DialogInvoker.Show<TDialog>(this.Parent.Window, beforeShow);
+                this.DialogInvoker.Show<TDialogView>(this.Parent.Window, dialogSetup);
             });
         }
     }

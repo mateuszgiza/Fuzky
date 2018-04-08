@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Fuzky.Core;
 using Fuzky.UI.Common;
+using Fuzky.UI.Windows.Dialog;
 using System;
 
 namespace Fuzky.UI.Invokers
@@ -15,15 +16,15 @@ namespace Fuzky.UI.Invokers
         }
 
         public void Show<TView>(IWindow parent)
-            where TView : IWindowViewModel
+            where TView : IViewModel
         {
             Show<TView>(parent, null);
         }
 
-        public void Show<TView>(IWindow parent, Action<TView> dialogSetup)
-            where TView : IWindowViewModel
+        public void Show<TView>(IWindow parent, Action<IDialogViewModel<TView>> dialogSetup)
+            where TView : IViewModel
         {
-            var dialogModel = this.container.Resolve<TView>();
+            var dialogModel = this.container.Resolve<IDialogViewModel<TView>>();
             dialogSetup?.Invoke(dialogModel);
 
             dialogModel.Window.Owner = parent;

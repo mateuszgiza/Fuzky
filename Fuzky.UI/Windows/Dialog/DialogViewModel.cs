@@ -6,19 +6,23 @@ using System.Windows.Input;
 namespace Fuzky.UI.Windows.Dialog
 {
     public class DialogViewModel<TView> : BaseWindowViewModel, IDialogViewModel<TView>
+        where TView : IViewModel
     {
         public DialogViewModel(IDialog window, IComponentContext container)
             : base(window, container)
         {
-            this.OkCommand = new DelegateCommand(OnOkCommand, CommandExecutionPolicies.OneAtATime);
+            base.ShowView<TView>();
+
+            this.OkCommand = new DelegateCommand(CloseDialogCommand, CommandExecutionPolicies.OneAtATime);
         }
 
         public string Title { get; set; } = "Information";
-        public string Message { get; set; }
+
+        TView IDialogViewModel<TView>.View => (TView)base.ViewModel;
 
         public ICommand OkCommand { get; }
 
-        private void OnOkCommand(object o)
+        internal void CloseDialogCommand(object o)
         {
             (this.Window as Window)?.Close();
         }
